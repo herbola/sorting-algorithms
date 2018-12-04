@@ -7,6 +7,26 @@
 #include <iostream>
 #include <functional>
 
+struct random_pred {
+	size_t size;
+	random_pred(size_t size):size(size) {
+	}
+	void operator()(int &n)const {
+		n = rand() % (size*10);
+	}
+};
+
+struct monotonous_pred {
+	int start;
+	int counter;
+	monotonous_pred(int counter, int start) : start(start), counter(counter) {
+	}
+	void operator()(int &n) {
+		counter += start;
+		n = counter;
+	}
+};
+
 class generate
 {
 public:
@@ -32,24 +52,6 @@ public:
 };
 
 
-struct random_pred {
-	size_t size;
-	random_pred(size_t size):size(size) {
-	}
-	void operator()(int &n)const {
-		n = rand() % (size*10);
-	}
-};
 
-struct monotonous_pred {
-	int start;
-	int counter;
-	monotonous_pred(int counter, int start) : start(start), counter(counter) {
-	}
-	void operator()(int &n) {
-		counter += start;
-		n = counter;
-	}
-};
 
 #endif GENERATE_H
