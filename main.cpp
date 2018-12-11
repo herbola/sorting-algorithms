@@ -15,7 +15,7 @@ void print(T begin, T end) {
 	std::cout << std::endl;
 }
 
-int main(){
+int main(int argc, char* argv[]){
 	time_measurements measure_object;
 	return measure_object.exec();
 }

@@ -47,11 +47,11 @@ public:
 		std::for_each(begin, end, [](int &n) {
 			n = 0;
 		});
-		
+
 	}
 };
 
 
 
 
-#endif GENERATE_H
+#endif //GENERATE_H

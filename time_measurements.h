@@ -5,6 +5,7 @@
 #include <map>
 #include <list>
 #include <functional>
+#include <cmath>
 #include <fstream>
 #include <string>
 #include "generate.h"
@@ -13,7 +14,7 @@
 
 using namespace std::chrono;
 
-// plot "file.dat" u 1:2 w l 
+// plot "file.dat" u 1:2 w l
 struct deviation {
 	deviation(double time, int amount) :time(time), amount(amount) {
 
@@ -28,7 +29,7 @@ struct gnuplot {
 		std::ofstream outfile;
 		outfile.open("dat\\" + algorithm + ".dat", std::fstream::in | std::fstream::out | std::fstream::app);
 		outfile << d.amount << " " << d.time << std::endl;
-			
+
 	}
 };
 
@@ -59,14 +60,14 @@ public:
 			deviation_vec.erase(deviation_vec.begin());
 		}
 	}
-	template<template<typename> typename  Functor, typename  T> void run_algorithm(T begin, T end, int &n, std::string &algorithm) 	// this function takes operator to algortihm, numbers , what type of algortihm. 
+	template<template<typename> typename  Functor, typename  T> void run_algorithm(T begin, T end, int &n, std::string &algorithm) 	// this function takes operator to algortihm, numbers , what type of algortihm.
 	{
 		high_resolution_clock::time_point t1 = high_resolution_clock::now();
 		Functor<T>()(begin, end);
 		high_resolution_clock::time_point t2 = high_resolution_clock::now();
 		duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
 		deviation_vec[algorithm].push_back({ time_span.count(), n });
-	} 
+	}
 };
 
 
